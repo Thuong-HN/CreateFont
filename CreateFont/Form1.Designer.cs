@@ -292,6 +292,7 @@
             this.textBox2.TabIndex = 11;
             this.textBox2.Text = resources.GetString("textBox2.Text");
             this.textBox2.WordWrap = false;
+            this.textBox2.TextChanged += new System.EventHandler(this.fontComboBox1_SelectedIndexChanged_1);
             // 
             // label4
             // 
@@ -337,7 +338,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Create Font";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);

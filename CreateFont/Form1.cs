@@ -64,10 +64,19 @@ namespace CreateFont {
             int index = 0;
             for (int i = 0; i < list.Length; i++) {
                 if (list[i] == ' ') {
-                    int w = 2;
-                    fontMapstr += "  0x00, 0x00, \r\n";
-                    fontstr += "  &" + name + "_map" + "[" + index + "], " + w + ", 1, 0," + "\r\n";
-                    index += w;
+
+                    Bitmap bitmap = new Bitmap(200, 200);
+                    Graphics graphics = Graphics.FromImage(bitmap);
+                    int space_w = (int)graphics.MeasureString(" ", font).Width;
+                    graphics.Dispose();
+                    bitmap.Dispose();
+
+                    fontMapstr += "  ";
+                    for (int s = 0; s < space_w; s++)
+                        fontMapstr += "0x00, ";
+                    fontMapstr += "\r\n";
+                    fontstr += "  &" + name + "_map" + "[" + index + "], " + space_w + ", 1, 0," + "\r\n";
+                    index += space_w;
                 }
                 else {
                     int yOffset = 0;
@@ -89,7 +98,7 @@ namespace CreateFont {
 
             fontMapstr = "static const unsigned char " + name + "_map" + "[] = {\r\n" + fontMapstr + "};";
             fontstr = "const Font " + name + "[] = {\r\n" + fontstr + "};";
-            return fontMapstr + "\r\n\r\n" + fontstr;
+            return "/*\r\ntypedef struct {\r\n  const unsigned char* map;\r\n  unsigned char W;\r\n  unsigned char H;\r\n  signed char yOffset;\r\n} Font;\r\n*/\r\n\r\n" + fontMapstr + "\r\n\r\n" + fontstr;
         }
 
         private Bitmap drawString(string str, Font font, Rectangle rectangle) {
@@ -196,10 +205,8 @@ namespace CreateFont {
                 string arr_name = textBox1.Text;
                 string list = textBox2.Text;
                 list = Regex.Replace(list, "(\r|\n)", "");
-                if (list == "") {
+                if (list == "") 
                     list = defaultList;
-                    textBox2.Text = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQ\r\nRSTUVWXYZ[ ]^_`abcdefghijklmnopqrstuvwxyz{|}~ ÀÁẢÃẠ\r\nĂẰẮẲẴẶÂẦẤẨẪẬĐÈÉẺẼẸÊỀẾỂỄỆÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠ\r\nỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴàáảãạăằắẳẵặâầấẩẫậđ\r\nèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵ";
-                }
 
                 coding = new Thread(delegate () {
                     string str = createCode(arr_name, list, font);
@@ -219,9 +226,14 @@ namespace CreateFont {
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e) {
+            int index = textBox1.SelectionStart;
             string str = textBox1.Text.Replace(" ", "_");
             textBox1.Text = str;
+            textBox1.SelectionStart = index;
+            if (str == "")
+                str = fontComboBox1.Text.Replace(" ", "_");
             label3.Text = "const Font " + str + "[];";
+            fontComboBox1_SelectedIndexChanged(sender, e);
         }
 
         private void fontComboBox1_SelectedIndexChanged_1(object sender, EventArgs e) {

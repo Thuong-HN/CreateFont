@@ -1,0 +1,17 @@
+D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\bin\Debug\CreateFont.exe
+D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\bin\Debug\CreateFont.pdb
+D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.Form1.resources
+D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.Properties.Resources.resources
+D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.csproj.GenerateResource.cache
+D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.exe
+D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.pdb
+D:\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\bin\Debug\CreateFont.exe
+D:\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\bin\Debug\CreateFont.pdb
+D:\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.csprojAssemblyReference.cache
+D:\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.Form1.resources
+D:\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.Properties.Resources.resources
+D:\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.csproj.GenerateResource.cache
+D:\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.csproj.CoreCompileInputs.cache
+D:\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.exe
+D:\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.pdb
+D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.csprojAssemblyReference.cache

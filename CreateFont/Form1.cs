@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace CreateFont {
     public partial class Form1 : Form {
@@ -198,11 +199,14 @@ namespace CreateFont {
         private void fontComboBox1_SelectedIndexChanged(object sender, EventArgs e) {
             if (fontComboBox1.SelectedIndex >= 0 && fontComboBox2.SelectedIndex >= 0 && comboBox1.SelectedIndex >= 0) {
                 Font font = getFont();
-                pictureBox1.Image = drawString("Chào bạn! Đây là mẫu font được tạo nên từ các lựa chọn cấu hình của bạn.", font, new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height));
+                pictureBox1.Image = drawString("!\"#$%&'()*+,-. 0123456789 ABCDEF abcdef\r\nChào Bạn\r\nこんにちは\r\n你好\r\n여보세요\r\nПривет\r\nहैलो\r\nสวัสดี\r\nសួស្តី", font, new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height));
                 panel3.Visible = true;
                 if (coding != null && coding.IsAlive)
                     coding.Abort();
-                string arr_name = textBox1.Text;
+                string arr_name = textBox1.Text.Replace(" ", "_");
+                if (arr_name == "")
+                    arr_name = fontComboBox1.Text.Replace(" ", "_");
+
                 string list = textBox2.Text;
                 list = Regex.Replace(list, "(\r|\n)", "");
                 if (list == "") 
@@ -222,12 +226,14 @@ namespace CreateFont {
 
         private void pictureBox1_SizeChanged(object sender, EventArgs e) {
             if (fontComboBox1.SelectedIndex >= 0 && fontComboBox2.SelectedIndex >= 0 && comboBox1.SelectedIndex >= 0)
-                pictureBox1.Image = drawString("Chào bạn! Đây là mẫu font được tạo nên từ các lựa chọn cấu hình của bạn.", getFont(), new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height));
+                pictureBox1.Image = drawString("!\"#$%&'()*+,-. 0123456789 ABCDEF abcdef\r\nChào Bạn\r\nこんにちは\r\n你好\r\n여보세요\r\nПривет\r\nहैलो\r\nสวัสดี\r\nសួស្តី", getFont(), new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height));
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e) {
             int index = textBox1.SelectionStart;
             string str = textBox1.Text.Replace(" ", "_");
+            while (str != "" && int.TryParse(str[0] + "", out _))
+                str = str.Substring(1);
             textBox1.Text = str;
             textBox1.SelectionStart = index;
             if (str == "")
@@ -239,6 +245,55 @@ namespace CreateFont {
         private void fontComboBox1_SelectedIndexChanged_1(object sender, EventArgs e) {
             textBox1.Text = fontComboBox1.Text;
             fontComboBox1_SelectedIndexChanged(sender, e);
+        }
+
+        private void about_menu_Click(object sender, EventArgs e) {
+            About about = new About();
+            about.ShowDialog();
+            about.Dispose();
+        }
+
+        private void exit_menu_Click(object sender, EventArgs e) {
+            Confirm confirm = new Confirm("Are you sure you want to exit?");
+            confirm.ShowDialog();
+            if (confirm.reply)
+                Application.Exit();
+            confirm.Dispose();
+        }
+
+        private void create_c_Click(object sender, EventArgs e) {
+            if (coding != null && !coding.IsAlive) {
+                FolderSelectDialog folderSelectDialog = new FolderSelectDialog();
+                folderSelectDialog.Title = "Select Folder";
+                if (folderSelectDialog.ShowDialog() == true) {
+                    string folder = folderSelectDialog.FileName;
+                    StreamWriter streamWriter = new StreamWriter(folder + "\\" + textBox1.Text + ".c");
+                    string code = richTextBox1.Text.Substring(richTextBox1.Text.IndexOf("*/") + 4);
+                    streamWriter.Write("\r\n#include \"" + textBox1.Text + ".h\r\n\r\n" + code + "\r\n");
+                    streamWriter.Close();
+
+                    streamWriter = new StreamWriter(folder + "\\" + textBox1.Text + ".h");
+                    streamWriter.WriteLine("");
+                    streamWriter.WriteLine("#ifndef __" + textBox1.Text);
+                    streamWriter.WriteLine("#define __" + textBox1.Text);
+                    streamWriter.WriteLine("");
+                    streamWriter.Write("typedef struct {\r\n  const unsigned char* map;\r\n  unsigned char W;\r\n  unsigned char H;\r\n  signed char yOffset;\r\n} Font;\r\n");
+                    streamWriter.WriteLine("");
+                    streamWriter.WriteLine("extern const Font " + textBox1.Text + "[];");
+                    streamWriter.WriteLine("");
+                    streamWriter.WriteLine("#endif");
+                    streamWriter.Close();
+
+                    Notification notification = new Notification("Created:\r\n" + textBox1.Text + ".h\r\n" + textBox1.Text + ".c\r\n");
+                    notification.ShowDialog();
+                    notification.Dispose();
+                }
+            }
+            else {
+                Notification notification = new Notification("The process is busy!");
+                notification.ShowDialog();
+                notification.Dispose();
+            }
         }
     }
 }

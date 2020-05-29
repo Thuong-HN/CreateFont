@@ -35,8 +35,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.fontComboBox2 = new CreateFont.UserControls.FontComboBox();
-            this.fontComboBox1 = new CreateFont.UserControls.FontComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
@@ -44,8 +42,13 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.thôngTinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.file_menu = new System.Windows.Forms.ToolStripMenuItem();
+            this.create_c = new System.Windows.Forms.ToolStripMenuItem();
+            this.exit_menu = new System.Windows.Forms.ToolStripMenuItem();
+            this.about_menu = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.fontComboBox1 = new CreateFont.UserControls.FontComboBox();
+            this.fontComboBox2 = new CreateFont.UserControls.FontComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -107,9 +110,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.BackColor = System.Drawing.Color.White;
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.Location = new System.Drawing.Point(1, 1);
             this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(354, 483);
             this.richTextBox1.TabIndex = 5;
             this.richTextBox1.Text = "";
@@ -156,11 +160,11 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 74);
+            this.label1.Location = new System.Drawing.Point(16, 74);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 13);
+            this.label1.Size = new System.Drawing.Size(66, 13);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Đang tạo mã...";
+            this.label1.Text = "Creating...";
             // 
             // panel2
             // 
@@ -188,51 +192,16 @@
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label2.Location = new System.Drawing.Point(2, 2);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 13);
+            this.label2.Size = new System.Drawing.Size(72, 13);
             this.label2.TabIndex = 8;
-            this.label2.Text = "Tên Font:";
-            // 
-            // fontComboBox2
-            // 
-            this.fontComboBox2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.fontComboBox2.DropDownHeight = 80;
-            this.fontComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
-            this.fontComboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fontComboBox2.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.fontComboBox2.FormattingEnabled = true;
-            this.fontComboBox2.IntegralHeight = false;
-            this.fontComboBox2.Items.AddRange(new object[] {
-            "Regular",
-            "Italic",
-            "Bold",
-            "Bold Italic"});
-            this.fontComboBox2.Location = new System.Drawing.Point(161, 174);
-            this.fontComboBox2.Name = "fontComboBox2";
-            this.fontComboBox2.Size = new System.Drawing.Size(128, 129);
-            this.fontComboBox2.TabIndex = 2;
-            this.fontComboBox2.SelectedIndexChanged += new System.EventHandler(this.fontComboBox1_SelectedIndexChanged);
-            // 
-            // fontComboBox1
-            // 
-            this.fontComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.fontComboBox1.DropDownHeight = 80;
-            this.fontComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
-            this.fontComboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fontComboBox1.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.fontComboBox1.FormattingEnabled = true;
-            this.fontComboBox1.IntegralHeight = false;
-            this.fontComboBox1.Location = new System.Drawing.Point(2, 174);
-            this.fontComboBox1.Name = "fontComboBox1";
-            this.fontComboBox1.Size = new System.Drawing.Size(153, 129);
-            this.fontComboBox1.TabIndex = 1;
-            this.fontComboBox1.SelectedIndexChanged += new System.EventHandler(this.fontComboBox1_SelectedIndexChanged_1);
+            this.label2.Text = "Font Name:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Blue;
-            this.label3.Location = new System.Drawing.Point(70, 1);
+            this.label3.Location = new System.Drawing.Point(80, 1);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(169, 16);
             this.label3.TabIndex = 9;
@@ -266,11 +235,11 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(133, 43);
+            this.label6.Location = new System.Drawing.Point(68, 43);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(143, 13);
+            this.label6.Size = new System.Drawing.Size(160, 13);
             this.label6.TabIndex = 13;
-            this.label6.Text = "(Ký tự xuống dòng bị bỏ qua)";
+            this.label6.Text = "(Newline characters are ignored)";
             // 
             // label5
             // 
@@ -278,9 +247,9 @@
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label5.Location = new System.Drawing.Point(3, 43);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(124, 13);
+            this.label5.Size = new System.Drawing.Size(59, 13);
             this.label5.TabIndex = 12;
-            this.label5.Text = "Danh sách bảng mã:";
+            this.label5.Text = "code list:";
             // 
             // textBox2
             // 
@@ -300,32 +269,87 @@
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label4.Location = new System.Drawing.Point(368, 4);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 13);
+            this.label4.Size = new System.Drawing.Size(79, 13);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Mảng kết quả:";
+            this.label4.Text = "Result array:";
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.thôngTinToolStripMenuItem});
+            this.file_menu,
+            this.about_menu});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(729, 24);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // fileToolStripMenuItem
+            // file_menu
             // 
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
-            this.fileToolStripMenuItem.Text = "Tệp tin";
+            this.file_menu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.create_c,
+            this.exit_menu});
+            this.file_menu.Name = "file_menu";
+            this.file_menu.Size = new System.Drawing.Size(37, 20);
+            this.file_menu.Text = "File";
             // 
-            // thôngTinToolStripMenuItem
+            // create_c
             // 
-            this.thôngTinToolStripMenuItem.Name = "thôngTinToolStripMenuItem";
-            this.thôngTinToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
-            this.thôngTinToolStripMenuItem.Text = "Thông tin";
+            this.create_c.Image = ((System.Drawing.Image)(resources.GetObject("create_c.Image")));
+            this.create_c.Name = "create_c";
+            this.create_c.Size = new System.Drawing.Size(169, 22);
+            this.create_c.Text = "Create File C/C++";
+            this.create_c.Click += new System.EventHandler(this.create_c_Click);
+            // 
+            // exit_menu
+            // 
+            this.exit_menu.Image = ((System.Drawing.Image)(resources.GetObject("exit_menu.Image")));
+            this.exit_menu.Name = "exit_menu";
+            this.exit_menu.Size = new System.Drawing.Size(169, 22);
+            this.exit_menu.Text = "Exit";
+            this.exit_menu.Click += new System.EventHandler(this.exit_menu_Click);
+            // 
+            // about_menu
+            // 
+            this.about_menu.Name = "about_menu";
+            this.about_menu.Size = new System.Drawing.Size(52, 20);
+            this.about_menu.Text = "About";
+            this.about_menu.Click += new System.EventHandler(this.about_menu_Click);
+            // 
+            // fontComboBox1
+            // 
+            this.fontComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.fontComboBox1.DropDownHeight = 80;
+            this.fontComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.fontComboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontComboBox1.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.fontComboBox1.FormattingEnabled = true;
+            this.fontComboBox1.IntegralHeight = false;
+            this.fontComboBox1.Location = new System.Drawing.Point(2, 174);
+            this.fontComboBox1.Name = "fontComboBox1";
+            this.fontComboBox1.Size = new System.Drawing.Size(153, 129);
+            this.fontComboBox1.TabIndex = 1;
+            this.fontComboBox1.SelectedIndexChanged += new System.EventHandler(this.fontComboBox1_SelectedIndexChanged_1);
+            // 
+            // fontComboBox2
+            // 
+            this.fontComboBox2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.fontComboBox2.DropDownHeight = 80;
+            this.fontComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.fontComboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontComboBox2.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.fontComboBox2.FormattingEnabled = true;
+            this.fontComboBox2.IntegralHeight = false;
+            this.fontComboBox2.Items.AddRange(new object[] {
+            "Regular",
+            "Italic",
+            "Bold",
+            "Bold Italic"});
+            this.fontComboBox2.Location = new System.Drawing.Point(161, 174);
+            this.fontComboBox2.Name = "fontComboBox2";
+            this.fontComboBox2.Size = new System.Drawing.Size(128, 129);
+            this.fontComboBox2.TabIndex = 2;
+            this.fontComboBox2.SelectedIndexChanged += new System.EventHandler(this.fontComboBox1_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -336,6 +360,7 @@
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Create Font";
@@ -372,12 +397,15 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem thôngTinToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem file_menu;
+        private System.Windows.Forms.ToolStripMenuItem about_menu;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ToolStripMenuItem create_c;
+        private System.Windows.Forms.ToolStripMenuItem exit_menu;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

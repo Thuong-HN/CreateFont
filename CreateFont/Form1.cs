@@ -301,7 +301,7 @@ namespace CreateFont {
                     string folder = folderSelectDialog.FileName;
                     StreamWriter streamWriter = new StreamWriter(folder + "\\" + textBox1.Text + ".c");
                     string code = richTextBox1.Text.Substring(richTextBox1.Text.IndexOf("*/") + 4);
-                    streamWriter.Write("\r\n#include \"" + textBox1.Text + ".h\r\n\r\n" + code + "\r\n");
+                    streamWriter.Write("\r\n#include \"" + textBox1.Text + ".h\"\r\n\r\n" + code + "\r\n");
                     streamWriter.Close();
 
                     streamWriter = new StreamWriter(folder + "\\" + textBox1.Text + ".h");

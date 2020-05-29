@@ -19,39 +19,64 @@ namespace CreateFont {
 
         public Form1() {
             InitializeComponent();
-            List<string> fonts = getAllFont();
-            for (int i = 0; i < fonts.Count; i++) {
-                fontComboBox1.Items.Add(fonts[i]);
-                Font font = new Font(fonts[i], fontComboBox1.Font.Size, fontComboBox1.Font.Style, GraphicsUnit.Point, ((byte)(0)));
+            int indexDefault = 0;
+            for (int i = 0; i < FontFamily.Families.Length; i++) {
+                fontComboBox1.Items.Add(FontFamily.Families[i].Name);
+                FontStyle fontStyle = fontComboBox1.Font.Style;
+                if (!FontFamily.Families[i].IsStyleAvailable(fontComboBox1.Font.Style)){
+                    if (FontFamily.Families[i].IsStyleAvailable(FontStyle.Regular))
+                        fontStyle = FontStyle.Regular;
+                    else if (FontFamily.Families[i].IsStyleAvailable(FontStyle.Italic))
+                        fontStyle = FontStyle.Italic;
+                    else if (FontFamily.Families[i].IsStyleAvailable(FontStyle.Bold))
+                        fontStyle = FontStyle.Bold;
+                    else if (FontFamily.Families[i].IsStyleAvailable(FontStyle.Bold | FontStyle.Italic))
+                        fontStyle = FontStyle.Bold | FontStyle.Italic;
+                }
+                Font font = new Font(FontFamily.Families[i].Name, fontComboBox1.Font.Size, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
                 fontComboBox1.Fonts.Add(font);
                 font.Dispose();
+                if (FontFamily.Families[i].Name.CompareTo("Times New Roman") == 0)
+                    indexDefault = i;
             }
-            fontComboBox2.Fonts.Add(new Font(fontComboBox2.Font.Name, fontComboBox2.Font.Size, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))));
-            fontComboBox2.Fonts.Add(new Font(fontComboBox2.Font.Name, fontComboBox2.Font.Size, FontStyle.Italic, GraphicsUnit.Point, ((byte)(0))));
-            fontComboBox2.Fonts.Add(new Font(fontComboBox2.Font.Name, fontComboBox2.Font.Size, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
-            fontComboBox2.Fonts.Add(new Font(fontComboBox2.Font.Name, fontComboBox2.Font.Size, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, ((byte)(0))));
+            fontComboBox1.SelectedIndex = indexDefault;
+            updateFontStyleList();
 
-            fontComboBox1.Text = "Times New Roman";
             fontComboBox2.SelectedIndex = 0;
             comboBox1.SelectedIndex = 2;
             textBox1.Text = fontComboBox1.Text;
         }
 
-        private List<string> getAllFont() {
-            List<string> fonts = new List<string>();
-            foreach (FontFamily font in FontFamily.Families) {
-                fonts.Add(font.Name);
+        private void updateFontStyleList() {
+            fontComboBox2.SelectedIndex = fontComboBox2.SelectedIndex;
+            string str = fontComboBox2.Text;
+            int index = 0;
+            List<FontStyle> fontStyles = getFontStyleList(FontFamily.Families[fontComboBox1.SelectedIndex]);
+            fontComboBox2.Items.Clear();
+            for (int i = 0; i < fontStyles.Count; i++) {
+                fontComboBox2.Items.Add(fontStyles[i]);
+                fontComboBox2.Fonts.Add(new Font(FontFamily.Families[fontComboBox1.SelectedIndex].Name, fontComboBox2.Font.Size, fontStyles[i], GraphicsUnit.Point, ((byte)(0))));
+                if (fontStyles[i].ToString().CompareTo(str) == 0)
+                    index = i;
             }
-            return fonts;
+            fontComboBox2.SelectedIndex = index;
+        }
+
+        private List<FontStyle> getFontStyleList(FontFamily fontFamily) {
+            List<FontStyle> fontStyles = new List<FontStyle>();
+            if (fontFamily.IsStyleAvailable(FontStyle.Regular))
+                fontStyles.Add(FontStyle.Regular);
+            if (fontFamily.IsStyleAvailable(FontStyle.Italic))
+                fontStyles.Add(FontStyle.Italic);
+            if (fontFamily.IsStyleAvailable(FontStyle.Bold))
+                fontStyles.Add(FontStyle.Bold);
+            if (fontFamily.IsStyleAvailable(FontStyle.Bold | FontStyle.Italic))
+                fontStyles.Add(FontStyle.Bold | FontStyle.Italic);
+            return fontStyles;
         }
 
         private Font getFont() {
-            FontStyle[] styles = {
-                FontStyle.Regular,
-                FontStyle.Italic,
-                FontStyle.Bold,
-                FontStyle.Bold | FontStyle.Italic,
-            };
+            List<FontStyle> styles = getFontStyleList(FontFamily.Families[fontComboBox1.SelectedIndex]);
             Font font = new Font(fontComboBox1.Text, Convert.ToInt32(comboBox1.Text), styles[fontComboBox2.SelectedIndex], GraphicsUnit.Point, ((byte)(0)));
             return font;
         }
@@ -81,7 +106,13 @@ namespace CreateFont {
                 }
                 else {
                     int yOffset = 0;
-                    byte[,] data = createData(list[i] + "", font, ref yOffset, ref height);
+                    byte[,] data = null;
+                    try {
+                        data = createData(list[i] + "", font, ref yOffset, ref height);
+                    }
+                    catch {
+                        data = createData("?", font, ref yOffset, ref height);
+                    }
                     yOffset = yOffset - yOffset0;
                     for (int y = 0; y < data.GetLength(1); y++) {
                         fontMapstr += "  ";
@@ -92,7 +123,7 @@ namespace CreateFont {
                         else
                             fontMapstr += "\r\n";
                     }
-                    fontstr += "  &" + name + "_map" + "[" + index + "], " + data.GetLength(0) + ", " + height + ", " + yOffset + ", //" + list[i] + "\r\n";
+                    fontstr += "  &" + name + "_map" + "[" + index + "], " + data.GetLength(0) + ", " + height + ", " + yOffset + ", // " + list[i] + "\r\n";
                     index += data.GetLength(0) * data.GetLength(1);
                 }
             }
@@ -244,6 +275,7 @@ namespace CreateFont {
 
         private void fontComboBox1_SelectedIndexChanged_1(object sender, EventArgs e) {
             textBox1.Text = fontComboBox1.Text;
+            updateFontStyleList();
             fontComboBox1_SelectedIndexChanged(sender, e);
         }
 

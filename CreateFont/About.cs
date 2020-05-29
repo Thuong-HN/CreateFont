@@ -28,5 +28,9 @@ namespace CreateFont {
         private void Info_Deactivate(object sender, EventArgs e) {
             this.Close();
         }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            Process.Start("http://github.com/electricthanhtung");
+        }
     }
 }

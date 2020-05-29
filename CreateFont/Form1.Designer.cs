@@ -41,14 +41,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.fontComboBox1 = new CreateFont.UserControls.FontComboBox();
+            this.fontComboBox2 = new CreateFont.UserControls.FontComboBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.file_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.create_c = new System.Windows.Forms.ToolStripMenuItem();
             this.exit_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.about_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.fontComboBox1 = new CreateFont.UserControls.FontComboBox();
-            this.fontComboBox2 = new CreateFont.UserControls.FontComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -273,6 +273,36 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Result array:";
             // 
+            // fontComboBox1
+            // 
+            this.fontComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.fontComboBox1.DropDownHeight = 80;
+            this.fontComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.fontComboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontComboBox1.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.fontComboBox1.FormattingEnabled = true;
+            this.fontComboBox1.IntegralHeight = false;
+            this.fontComboBox1.Location = new System.Drawing.Point(2, 174);
+            this.fontComboBox1.Name = "fontComboBox1";
+            this.fontComboBox1.Size = new System.Drawing.Size(153, 129);
+            this.fontComboBox1.TabIndex = 1;
+            this.fontComboBox1.SelectedIndexChanged += new System.EventHandler(this.fontComboBox1_SelectedIndexChanged_1);
+            // 
+            // fontComboBox2
+            // 
+            this.fontComboBox2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.fontComboBox2.DropDownHeight = 80;
+            this.fontComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.fontComboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontComboBox2.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.fontComboBox2.FormattingEnabled = true;
+            this.fontComboBox2.IntegralHeight = false;
+            this.fontComboBox2.Location = new System.Drawing.Point(161, 174);
+            this.fontComboBox2.Name = "fontComboBox2";
+            this.fontComboBox2.Size = new System.Drawing.Size(128, 129);
+            this.fontComboBox2.TabIndex = 2;
+            this.fontComboBox2.SelectedIndexChanged += new System.EventHandler(this.fontComboBox1_SelectedIndexChanged);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -315,41 +345,6 @@
             this.about_menu.Size = new System.Drawing.Size(52, 20);
             this.about_menu.Text = "About";
             this.about_menu.Click += new System.EventHandler(this.about_menu_Click);
-            // 
-            // fontComboBox1
-            // 
-            this.fontComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.fontComboBox1.DropDownHeight = 80;
-            this.fontComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
-            this.fontComboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fontComboBox1.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.fontComboBox1.FormattingEnabled = true;
-            this.fontComboBox1.IntegralHeight = false;
-            this.fontComboBox1.Location = new System.Drawing.Point(2, 174);
-            this.fontComboBox1.Name = "fontComboBox1";
-            this.fontComboBox1.Size = new System.Drawing.Size(153, 129);
-            this.fontComboBox1.TabIndex = 1;
-            this.fontComboBox1.SelectedIndexChanged += new System.EventHandler(this.fontComboBox1_SelectedIndexChanged_1);
-            // 
-            // fontComboBox2
-            // 
-            this.fontComboBox2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.fontComboBox2.DropDownHeight = 80;
-            this.fontComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
-            this.fontComboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fontComboBox2.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.fontComboBox2.FormattingEnabled = true;
-            this.fontComboBox2.IntegralHeight = false;
-            this.fontComboBox2.Items.AddRange(new object[] {
-            "Regular",
-            "Italic",
-            "Bold",
-            "Bold Italic"});
-            this.fontComboBox2.Location = new System.Drawing.Point(161, 174);
-            this.fontComboBox2.Name = "fontComboBox2";
-            this.fontComboBox2.Size = new System.Drawing.Size(128, 129);
-            this.fontComboBox2.TabIndex = 2;
-            this.fontComboBox2.SelectedIndexChanged += new System.EventHandler(this.fontComboBox1_SelectedIndexChanged);
             // 
             // Form1
             // 

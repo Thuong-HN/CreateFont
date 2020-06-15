@@ -18,3 +18,4 @@ D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFon
 D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.Confirm.resources
 D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.Notification.resources
 D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.csproj.CoreCompileInputs.cache
+D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.csprojAssemblyReference.cache

@@ -81,13 +81,14 @@ namespace CreateFont {
             return font;
         }
 
-        private string createCode(string name, string list, Font font) {
+        private string createCode(string name, string list, Font font, out int data_size) {
             int yOffset0 = 0;
             int height = 0;
             createData("A", font, ref yOffset0, ref height);
             StringBuilder fontMapstr = new StringBuilder();
             StringBuilder fontstr = new StringBuilder();
             int index = 0;
+            data_size = 0;
             for (int i = 0; i < list.Length; i++) {
                 if (list[i] == ' ') {
 
@@ -111,10 +112,12 @@ namespace CreateFont {
                     fontstr.Append(space_w);
                     fontstr.Append(", 1, 0,\r\n");
                     index += space_w;
+
+                    data_size += space_w;
                 }
                 else {
                     int yOffset = 0;
-                    byte[,] data = null;
+                    byte[,] data;
                     try {
                         data = createData(list[i] + "", font, ref yOffset, ref height);
                     }
@@ -152,6 +155,8 @@ namespace CreateFont {
                     fontstr.Append(list[i]);
                     fontstr.Append("\r\n");
                     index += data.GetLength(0) * data.GetLength(1);
+
+                    data_size += data.GetLength(0) * data.GetLength(1);
                 }
             }
 
@@ -159,12 +164,21 @@ namespace CreateFont {
             res.Append("/*\r\ntypedef struct {\r\n  const unsigned char* map;\r\n  unsigned char W;\r\n  unsigned char H;\r\n  signed char yOffset;\r\n} Font;\r\n*/\r\n\r\n");
             res.Append("static const unsigned char ");
             res.Append(name);
-            res.Append("_map" + "[] = {\r\n" + fontMapstr + "};\r\n\r\n");
+            res.Append("_map" + "[");
+            res.Append(data_size);
+            res.Append("] = {\r\n");
+            res.Append(fontMapstr);
+            res.Append("};\r\n\r\n");
             res.Append("const Font ");
             res.Append(name);
-            res.Append("[] = {\r\n");
+            res.Append("[");
+            res.Append(list.Length);
+            res.Append("] = {\r\n");
             res.Append(fontstr);
             res.Append("};");
+
+            data_size += list.Length * 8;
+
             return res.ToString();
         }
 
@@ -243,6 +257,7 @@ namespace CreateFont {
                 if (y_end > 0)
                     break;
             }
+            solidBrush.Dispose();
             graphics.Dispose();
 
             int line = (y_end - y_start) / 8;
@@ -279,10 +294,12 @@ namespace CreateFont {
                     list = defaultList;
 
                 coding = new Thread(delegate () {
-                    string str = createCode(arr_name, list, font);
+                    int data_size;
+                    string str = createCode(arr_name, list, font, out data_size);
                     BeginInvoke((MethodInvoker)delegate () {
                         richTextBox1.Text = str;
                         panel3.Visible = false;
+                        label7.Text = data_size + " Byte";
                     });
                 });
                 coding.IsBackground = true;

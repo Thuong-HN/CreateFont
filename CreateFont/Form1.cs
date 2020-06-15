@@ -85,8 +85,8 @@ namespace CreateFont {
             int yOffset0 = 0;
             int height = 0;
             createData("A", font, ref yOffset0, ref height);
-            string fontMapstr = "";
-            string fontstr = "";
+            StringBuilder fontMapstr = new StringBuilder();
+            StringBuilder fontstr = new StringBuilder();
             int index = 0;
             for (int i = 0; i < list.Length; i++) {
                 if (list[i] == ' ') {
@@ -97,11 +97,19 @@ namespace CreateFont {
                     graphics.Dispose();
                     bitmap.Dispose();
 
-                    fontMapstr += "  ";
+                    fontMapstr.Append("  ");
                     for (int s = 0; s < space_w; s++)
-                        fontMapstr += "0x00, ";
-                    fontMapstr += "\r\n";
-                    fontstr += "  &" + name + "_map" + "[" + index + "], " + space_w + ", 1, 0," + "\r\n";
+                        fontMapstr.Append("0x00, ");
+                    fontMapstr.Append("\r\n");
+
+                    fontstr.Append("  &");
+                    fontstr.Append(name);
+                    fontstr.Append("_map");
+                    fontstr.Append("[");
+                    fontstr.Append(index);
+                    fontstr.Append("], ");
+                    fontstr.Append(space_w);
+                    fontstr.Append(", 1, 0,\r\n");
                     index += space_w;
                 }
                 else {
@@ -115,22 +123,49 @@ namespace CreateFont {
                     }
                     yOffset = yOffset - yOffset0;
                     for (int y = 0; y < data.GetLength(1); y++) {
-                        fontMapstr += "  ";
-                        for (int x = 0; x < data.GetLength(0); x++) 
-                            fontMapstr += "0x" + ToHex(data[x, y]) + ", ";
-                        if(y == 0)
-                            fontMapstr += "// " + list[i] + "\r\n";
+                        fontMapstr.Append("  ");
+                        for (int x = 0; x < data.GetLength(0); x++) {
+                            fontMapstr.Append("0x");
+                            fontMapstr.Append(ToHex(data[x, y]));
+                            fontMapstr.Append(", ");
+                        }
+                        if (y == 0) {
+                            fontMapstr.Append("// ");
+                            fontMapstr.Append(list[i]);
+                            fontMapstr.Append("\r\n");
+                        }
                         else
-                            fontMapstr += "\r\n";
+                            fontMapstr.Append("\r\n");
                     }
-                    fontstr += "  &" + name + "_map" + "[" + index + "], " + data.GetLength(0) + ", " + height + ", " + yOffset + ", // " + list[i] + "\r\n";
+                    fontstr.Append("  &");
+                    fontstr.Append(name);
+                    fontstr.Append("_map");
+                    fontstr.Append("[");
+                    fontstr.Append(index);
+                    fontstr.Append("], ");
+                    fontstr.Append(data.GetLength(0));
+                    fontstr.Append(", ");
+                    fontstr.Append(height);
+                    fontstr.Append(", ");
+                    fontstr.Append(yOffset);
+                    fontstr.Append(", // ");
+                    fontstr.Append(list[i]);
+                    fontstr.Append("\r\n");
                     index += data.GetLength(0) * data.GetLength(1);
                 }
             }
 
-            fontMapstr = "static const unsigned char " + name + "_map" + "[] = {\r\n" + fontMapstr + "};";
-            fontstr = "const Font " + name + "[] = {\r\n" + fontstr + "};";
-            return "/*\r\ntypedef struct {\r\n  const unsigned char* map;\r\n  unsigned char W;\r\n  unsigned char H;\r\n  signed char yOffset;\r\n} Font;\r\n*/\r\n\r\n" + fontMapstr + "\r\n\r\n" + fontstr;
+            StringBuilder res = new StringBuilder();
+            res.Append("/*\r\ntypedef struct {\r\n  const unsigned char* map;\r\n  unsigned char W;\r\n  unsigned char H;\r\n  signed char yOffset;\r\n} Font;\r\n*/\r\n\r\n");
+            res.Append("static const unsigned char ");
+            res.Append(name);
+            res.Append("_map" + "[] = {\r\n" + fontMapstr + "};\r\n\r\n");
+            res.Append("const Font ");
+            res.Append(name);
+            res.Append("[] = {\r\n");
+            res.Append(fontstr);
+            res.Append("};");
+            return res.ToString();
         }
 
         private Bitmap drawString(string str, Font font, Rectangle rectangle) {
@@ -297,7 +332,7 @@ namespace CreateFont {
             if (coding != null && !coding.IsAlive) {
                 FolderSelectDialog folderSelectDialog = new FolderSelectDialog();
                 folderSelectDialog.Title = "Select Folder";
-                if (folderSelectDialog.ShowDialog() == true) {
+                if (folderSelectDialog.ShowDialog(this.Handle) == true) {
                     string folder = folderSelectDialog.FileName;
                     StreamWriter streamWriter = new StreamWriter(folder + "\\" + textBox1.Text + ".c");
                     string code = richTextBox1.Text.Substring(richTextBox1.Text.IndexOf("*/") + 4);

@@ -14,7 +14,7 @@ D:\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.cspr
 D:\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.csproj.CoreCompileInputs.cache
 D:\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.exe
 D:\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.pdb
-D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.csprojAssemblyReference.cache
 D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.About.resources
 D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.Confirm.resources
 D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.Notification.resources
+D:\Drive\OneDrive\Visual Stdio\Project\CreateFont\CreateFont\obj\Debug\CreateFont.csproj.CoreCompileInputs.cache

@@ -41,14 +41,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.fontComboBox1 = new CreateFont.UserControls.FontComboBox();
-            this.fontComboBox2 = new CreateFont.UserControls.FontComboBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.file_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.create_c = new System.Windows.Forms.ToolStripMenuItem();
             this.exit_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.about_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.fontComboBox1 = new CreateFont.UserControls.FontComboBox();
+            this.fontComboBox2 = new CreateFont.UserControls.FontComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -273,6 +273,49 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Result array:";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.file_menu,
+            this.about_menu});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(729, 24);
+            this.menuStrip1.TabIndex = 11;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // file_menu
+            // 
+            this.file_menu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.create_c,
+            this.exit_menu});
+            this.file_menu.Name = "file_menu";
+            this.file_menu.Size = new System.Drawing.Size(37, 20);
+            this.file_menu.Text = "File";
+            // 
+            // create_c
+            // 
+            this.create_c.Image = ((System.Drawing.Image)(resources.GetObject("create_c.Image")));
+            this.create_c.Name = "create_c";
+            this.create_c.Size = new System.Drawing.Size(180, 22);
+            this.create_c.Text = "Create File C/C++";
+            this.create_c.Click += new System.EventHandler(this.create_c_Click);
+            // 
+            // exit_menu
+            // 
+            this.exit_menu.Image = ((System.Drawing.Image)(resources.GetObject("exit_menu.Image")));
+            this.exit_menu.Name = "exit_menu";
+            this.exit_menu.Size = new System.Drawing.Size(180, 22);
+            this.exit_menu.Text = "Exit";
+            this.exit_menu.Click += new System.EventHandler(this.exit_menu_Click);
+            // 
+            // about_menu
+            // 
+            this.about_menu.Name = "about_menu";
+            this.about_menu.Size = new System.Drawing.Size(52, 20);
+            this.about_menu.Text = "About";
+            this.about_menu.Click += new System.EventHandler(this.about_menu_Click);
+            // 
             // fontComboBox1
             // 
             this.fontComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
@@ -302,49 +345,6 @@
             this.fontComboBox2.Size = new System.Drawing.Size(128, 129);
             this.fontComboBox2.TabIndex = 2;
             this.fontComboBox2.SelectedIndexChanged += new System.EventHandler(this.fontComboBox1_SelectedIndexChanged);
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.file_menu,
-            this.about_menu});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(729, 24);
-            this.menuStrip1.TabIndex = 11;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // file_menu
-            // 
-            this.file_menu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.create_c,
-            this.exit_menu});
-            this.file_menu.Name = "file_menu";
-            this.file_menu.Size = new System.Drawing.Size(37, 20);
-            this.file_menu.Text = "File";
-            // 
-            // create_c
-            // 
-            this.create_c.Image = ((System.Drawing.Image)(resources.GetObject("create_c.Image")));
-            this.create_c.Name = "create_c";
-            this.create_c.Size = new System.Drawing.Size(169, 22);
-            this.create_c.Text = "Create File C/C++";
-            this.create_c.Click += new System.EventHandler(this.create_c_Click);
-            // 
-            // exit_menu
-            // 
-            this.exit_menu.Image = ((System.Drawing.Image)(resources.GetObject("exit_menu.Image")));
-            this.exit_menu.Name = "exit_menu";
-            this.exit_menu.Size = new System.Drawing.Size(169, 22);
-            this.exit_menu.Text = "Exit";
-            this.exit_menu.Click += new System.EventHandler(this.exit_menu_Click);
-            // 
-            // about_menu
-            // 
-            this.about_menu.Name = "about_menu";
-            this.about_menu.Size = new System.Drawing.Size(52, 20);
-            this.about_menu.Text = "About";
-            this.about_menu.Click += new System.EventHandler(this.about_menu_Click);
             // 
             // Form1
             // 
